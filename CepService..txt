@@ -1,0 +1,24 @@
+package com.accenture.consumo.sercice;
+
+import com.accenture.consumo.interfaces.Cepinterface;
+import com.accenture.consumo.model.Endereco;
+import com.accenture.consumo.repository.ConsumoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
+@Service
+public class CepService implements Cepinterface {
+
+    @Autowired
+    ConsumoRepository consumoRepository;
+
+    @GetMapping("{cep}/json")
+    public Endereco findEnderecoByCep(String cep) {  
+        Endereco endereco = new Endereco();
+        consumoRepository.findEnderecoByCep(cep);
+        return consumoRepository.save(endereco);
+    }
+
+}
